@@ -26,7 +26,7 @@ export default function Footer() {
               <FiLinkedin size={20} />
             </a>
             <a
-              href="mailto:sagar@example.com"
+              href="mailto:sagardhebe12yt@gmail.com"
               className="rounded-full p-4 shadow-lg cursor-pointer text-gray-500 hover:text-[#5651e5] hover:scale-110 transition"
             >
               <FiMail size={20} />

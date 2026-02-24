@@ -68,7 +68,7 @@ export default function ContactPage() {
         formRef.current.reset();
         alert('✅ Message sent successfully!');
       } catch (error) {
-        console.error('❌ EmailJS Error:', error);
+        console.error(' EmailJS Error:', error);
         alert('❌ Failed to send message: ' + error.message);
       }
     });

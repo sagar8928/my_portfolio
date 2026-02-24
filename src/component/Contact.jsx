@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef, useTransition } from 'react';
+import { useRef, useTransition, useEffect } from 'react'; // ✅ Added useEffect
 import emailjs from '@emailjs/browser';
 
 import { AiOutlineMail } from 'react-icons/ai';
@@ -10,18 +10,44 @@ import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
 import { HiOutlineChevronDoubleUp } from 'react-icons/hi';
 
+// ==================== ENVIRONMENT VARIABLES ====================
+// ✅ HIGHLIGHT: These read from process.env
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
-const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID; 
-const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID; 
-const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY; 
-/* ==================================================== */
+// ✅ DEBUG: Log to verify values are loaded (remove in production)
+console.log('🔍 EmailJS Config:', {
+  SERVICE_ID: SERVICE_ID || '❌ UNDEFINED',
+  TEMPLATE_ID: TEMPLATE_ID || '❌ UNDEFINED',
+  PUBLIC_KEY: PUBLIC_KEY || '❌ UNDEFINED',
+});
+// ================================================================
 
 export default function ContactPage() {
   const formRef = useRef(null);
   const [isPending, startTransition] = useTransition();
 
+  // ✅ ADD THIS: Check if env vars are loaded on mount
+  useEffect(() => {
+    if (!PUBLIC_KEY) {
+      console.error('❌ NEXT_PUBLIC_EMAILJS_PUBLIC_KEY is not defined!');
+      alert(
+        'Configuration error: EmailJS Public Key is missing. Check console.',
+      );
+    }
+  }, []);
+
   function handleSubmit(e) {
     e.preventDefault();
+
+    // ✅ HIGHLIGHT: Guard clause to prevent submission if key is missing
+    if (!PUBLIC_KEY || !SERVICE_ID || !TEMPLATE_ID) {
+      alert(
+        'EmailJS configuration is missing. Please check your environment variables.',
+      );
+      return;
+    }
 
     const formData = new FormData(formRef.current);
 
@@ -35,16 +61,20 @@ export default function ContactPage() {
 
     startTransition(async () => {
       try {
+        // ✅ HIGHLIGHT: Correct parameter order for emailjs.send()
+        // send(serviceID, templateID, templateParams, publicKey)
         await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
 
         formRef.current.reset();
-        alert('Message sent successfully');
+        alert('✅ Message sent successfully!');
       } catch (error) {
-        console.error('EmailJS Error:', error);
-        alert('Failed to send message');
+        console.error('❌ EmailJS Error:', error);
+        alert('❌ Failed to send message: ' + error.message);
       }
     });
   }
+
+  // ... rest of your component remains the same
 
   return (
     <section id="contact" className="w-full min-h-screen">

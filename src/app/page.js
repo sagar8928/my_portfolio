@@ -1,10 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FiArrowRight, FiLayout, FiServer } from 'react-icons/fi';
+import { FiArrowRight, FiLayout, FiServer, FiCode,FiFileText } from 'react-icons/fi';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
+// ✅ CORRECT IMPORT PATH (use @/ alias or relative)
 import AboutSection from '../component/About';
 import ContactSection from '../component/Contact';
+import Skills from '../component/Skills';
 
 export default function Home() {
   return (
@@ -72,14 +74,14 @@ export default function Home() {
             >
               <FaLinkedinIn size={22} />
             </a>
-
             <a
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm font-medium text-gray-300 hover:text-white border border-white/20 px-4 py-1.5 rounded-full transition"
+              className="rounded-full p-4 shadow-lg cursor-pointer text-gray-500 hover:text-[#5651e5] hover:scale-110 transition"
+              aria-label="Resume"
             >
-              Resume
+              <FiFileText size={22} />
             </a>
           </div>
 
@@ -105,8 +107,8 @@ export default function Home() {
       {/* ABOUT */}
       <AboutSection />
 
-      {/* SKILLS */}
-      <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-dark/50">
+      {/* ✅ WHAT I DO SECTION - Services/Specialties */}
+      <section id="services" className="py-20 px-4 sm:px-6 lg:px-8 bg-dark/50">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 gradient-text">
             What I Do
@@ -127,7 +129,7 @@ export default function Home() {
                   'Designing scalable APIs and backend systems with Node.js, Express, and databases.',
               },
               {
-                icon: <FiServer size={40} />,
+                icon: <FiCode size={40} />,
                 title: 'Full Stack Solutions',
                 description:
                   'Building complete products end-to-end with clean architecture and real-world constraints.',
@@ -135,7 +137,7 @@ export default function Home() {
             ].map((skill, index) => (
               <div
                 key={index}
-                className="glass-effect p-8 rounded-2xl hover:-translate-y-1 transition-transform"
+                className="glass-effect p-8 rounded-2xl hover:-translate-y-1 transition-transform duration-300 border border-white/10 bg-white/5 backdrop-blur-sm"
               >
                 <div className="text-primary mb-4">{skill.icon}</div>
                 <h3 className="text-xl font-bold mb-3 text-white">
@@ -149,6 +151,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ✅ TECH STACK - Skills Grid */}
+      <Skills />
 
       {/* CONTACT */}
       <ContactSection />

@@ -3,10 +3,18 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useTransition } from 'react';
+import emailjs from '@emailjs/browser';
+
 import { AiOutlineMail } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import { BsFillPersonLinesFill } from 'react-icons/bs';
 import { HiOutlineChevronDoubleUp } from 'react-icons/hi';
+
+
+const SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID; 
+const TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID; 
+const PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY; 
+/* ==================================================== */
 
 export default function ContactPage() {
   const formRef = useRef(null);
@@ -14,20 +22,27 @@ export default function ContactPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const data = new FormData(formRef.current);
+
+    const formData = new FormData(formRef.current);
+
+    const templateParams = {
+      from_name: formData.get('name'),
+      from_email: formData.get('email'),
+      phone: formData.get('phone'),
+      subject: formData.get('subject'),
+      message: formData.get('message'),
+    };
 
     startTransition(async () => {
-      // TODO: replace with Server Action (Resend / Nodemailer)
-      console.log({
-        name: data.get('name'),
-        phone: data.get('phone'),
-        email: data.get('email'),
-        subject: data.get('subject'),
-        message: data.get('message'),
-      });
+      try {
+        await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
 
-      formRef.current.reset();
-      alert('Message sent');
+        formRef.current.reset();
+        alert('Message sent successfully');
+      } catch (error) {
+        console.error('EmailJS Error:', error);
+        alert('Failed to send message');
+      }
     });
   }
 
@@ -41,13 +56,14 @@ export default function ContactPage() {
 
         <div className="grid lg:grid-cols-5 gap-8">
           {/* LEFT */}
-          <div className="col-span-3 lg:col-span-2 shadow-xl rounded-xl p-4">
+          <aside className="col-span-3 lg:col-span-2 shadow-xl rounded-xl p-4">
             <div className="p-4 h-full">
               <Image
                 src="/assets/contact.jpg"
                 alt="Contact"
                 width={600}
                 height={400}
+                priority
                 className="rounded-xl hover:scale-105 transition"
               />
 
@@ -56,7 +72,6 @@ export default function ContactPage() {
                 <p className="text-gray-600">Full-Stack Developer</p>
                 <p className="py-4 text-gray-600">
                   Available for full-time roles and serious freelance work.
-                  Let’s build something solid.
                 </p>
               </div>
 
@@ -64,71 +79,70 @@ export default function ContactPage() {
                 Connect With Me
               </p>
 
-              {/* SOCIAL LINKS */}
               <div className="flex items-center gap-6 py-4">
-                <a
+                <SocialLink
                   href="https://www.linkedin.com/in/sagar-dhebe-891997244"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                  className="rounded-full p-4 shadow-lg cursor-pointer text-gray-500 hover:text-[#5651e5] hover:scale-110 transition"
+                  label="LinkedIn"
                 >
                   <FaLinkedinIn size={20} />
-                </a>
+                </SocialLink>
 
-                <a
-                  href="https://github.com/sagar8928"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="GitHub"
-                  className="rounded-full p-4 shadow-lg cursor-pointer text-gray-500 hover:text-[#5651e5] hover:scale-110 transition"
-                >
+                <SocialLink href="https://github.com/sagar8928" label="GitHub">
                   <FaGithub size={20} />
-                </a>
+                </SocialLink>
 
-                <a
-                  href="mailto:sagardhebe8928@gmail.com"
-                  aria-label="Email"
-                  className="rounded-full p-4 shadow-lg cursor-pointer text-gray-500 hover:text-[#5651e5] hover:scale-110 transition"
+                <SocialLink
+                  href="mailto:sagardhebe12yt@gmail.com"
+                  label="Email"
                 >
                   <AiOutlineMail size={22} />
-                </a>
+                </SocialLink>
 
-                <a
-                  href="/resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Resume"
-                  className="rounded-full p-4 shadow-lg cursor-pointer text-gray-500 hover:text-[#5651e5] hover:scale-110 transition"
-                >
+                <SocialLink href="/resume.pdf" label="Resume">
                   <BsFillPersonLinesFill size={20} />
-                </a>
+                </SocialLink>
               </div>
             </div>
-          </div>
+          </aside>
 
           {/* RIGHT */}
           <div className="col-span-3 shadow-xl rounded-xl p-6">
-            <form ref={formRef} onSubmit={handleSubmit}>
-              <div className="grid md:grid-cols-2 gap-4">
-                <Input label="Name" name="name" />
-                <Input label="Phone" name="phone" />
-              </div>
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              noValidate
+              className="space-y-4"
+            >
+              <fieldset className="grid md:grid-cols-2 gap-4">
+                <Input id="name" label="Name" name="name" required />
+                <Input id="phone" label="Phone" name="phone" type="tel" />
+              </fieldset>
 
-              <Input label="Email" name="email" type="email" />
-              <Input label="Subject" name="subject" />
+              <Input
+                id="email"
+                label="Email"
+                name="email"
+                type="email"
+                required
+              />
+
+              <Input id="subject" label="Subject" name="subject" required />
 
               <div className="flex flex-col py-2">
-                <label className="uppercase text-sm py-2">Message</label>
+                <label htmlFor="message" className="uppercase text-sm py-2">
+                  Message
+                </label>
                 <textarea
+                  id="message"
                   name="message"
                   rows={10}
                   required
-                  className="border-2 rounded-lg p-3 border-gray-300"
+                  className="border-2 rounded-lg p-3 border-gray-300 resize-none"
                 />
               </div>
 
               <button
+                type="submit"
                 disabled={isPending}
                 className="w-full bg-[#5651e5] text-white p-4 mt-4 rounded-lg hover:bg-[#4640d9] transition disabled:opacity-50"
               >
@@ -140,7 +154,7 @@ export default function ContactPage() {
 
         {/* BACK TO TOP */}
         <div className="flex justify-center py-12">
-          <Link href="/">
+          <Link href="/" aria-label="Back to top">
             <div className="rounded-full shadow-lg p-4 hover:scale-110 transition cursor-pointer">
               <HiOutlineChevronDoubleUp size={30} className="text-[#5651e5]" />
             </div>
@@ -151,18 +165,35 @@ export default function ContactPage() {
   );
 }
 
-/* ---------------- helpers ---------------- */
+/* ================= HELPERS ================= */
 
-function Input({ label, name, type = 'text' }) {
+function Input({ id, label, name, type = 'text', required = false }) {
   return (
     <div className="flex flex-col py-2">
-      <label className="uppercase text-sm py-2">{label}</label>
+      <label htmlFor={id} className="uppercase text-sm py-2">
+        {label}
+      </label>
       <input
-        type={type}
+        id={id}
         name={name}
-        required
+        type={type}
+        required={required}
         className="border-2 rounded-lg p-3 border-gray-300"
       />
     </div>
+  );
+}
+
+function SocialLink({ href, label, children }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="rounded-full p-4 shadow-lg cursor-pointer text-gray-500 hover:text-[#5651e5] hover:scale-110 transition"
+    >
+      {children}
+    </a>
   );
 }

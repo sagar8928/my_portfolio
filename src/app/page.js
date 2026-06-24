@@ -1,10 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { FiArrowRight, FiLayout, FiServer, FiCode,FiFileText } from 'react-icons/fi';
+import {
+  FiArrowRight,
+  FiLayout,
+  FiServer,
+  FiCode,
+  FiFileText,
+} from 'react-icons/fi';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 
 // ✅ CORRECT IMPORT PATH (use @/ alias or relative)
 import AboutSection from '../component/About';
+import Projects from '../component/Project';
 import ContactSection from '../component/Contact';
 import Skills from '../component/Skills';
 
@@ -151,6 +158,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Project */}
+      <Projects />
 
       {/* ✅ TECH STACK - Skills Grid */}
       <Skills />

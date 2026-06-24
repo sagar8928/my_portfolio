@@ -10,7 +10,7 @@ export default function Footer() {
           </p>
           <div className="flex space-x-6">
             <a
-              href="https://github.com"
+              href="https://github.com/sagar8928"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full p-4 shadow-lg cursor-pointer text-gray-500 hover:text-[#5651e5] hover:scale-110 transition"
@@ -18,7 +18,7 @@ export default function Footer() {
               <FiGithub size={20} />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/sagar-dhebe-891997244"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full p-4 shadow-lg cursor-pointer text-gray-500 hover:text-[#5651e5] hover:scale-110 transition"

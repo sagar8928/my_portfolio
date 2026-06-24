@@ -10,6 +10,7 @@ const navLinks = [
   { href: '#home', label: 'Home' },
   { href: '#about', label: 'About Me' },
   { href: '#skills', label: 'Skills' },
+  { href: '#projects', label: 'Projects' },
   { href: '#contact', label: 'Contact' },
   { href: '/resume.pdf', label: 'Resume', external: true },
 ];
@@ -41,7 +42,7 @@ export default function Navbar() {
           <div className="flex h-16 items-center justify-between">
             {/* LOGO */}
             <Link href="#home" className="text-2xl font-bold text-black">
-              Sagar<span className="text-primary">.</span>
+              Sagar<span className="text-primary"></span>
             </Link>
 
             {/* DESKTOP LINKS */}

@@ -54,7 +54,9 @@ export default function ContactPage() {
     const templateParams = {
       from_name: formData.get('name'),
       from_email: formData.get('email'),
+      // include both phone and number if provided
       phone: formData.get('phone'),
+      number: formData.get('number'),
       subject: formData.get('subject'),
       message: formData.get('message'),
     };
@@ -146,6 +148,8 @@ export default function ContactPage() {
               <fieldset className="grid md:grid-cols-2 gap-4">
                 <Input id="name" label="Name" name="name" required />
                 <Input id="phone" label="Phone" name="phone" type="tel" />
+                {/* extra number field if you want to collect a separate value */}
+                <Input id="number" label="Number" name="number" type="tel" />
               </fieldset>
 
               <Input

@@ -12,7 +12,7 @@ const projects = [
       'Built a cutting-edge AI-driven conversational platform leveraging Groq API for real-time, context-aware responses. The Next.js frontend delivers a seamless, responsive user experience, while the Node.js & Express backend orchestrates secure and scalable operations.',
     image: '/assets/projects/ecommerce.png',
     tags: ['React', 'Node.js', 'MongoDB', 'Express', 'Tailwind'],
-    live: 'https://your-live-link.vercel.app',
+    live: 'https://github.com/sagar8928/Deepseek-Clone',
     github: 'https://github.com/sagar8928/Deepseek-Clone',
     category: 'Full Stack',
   },

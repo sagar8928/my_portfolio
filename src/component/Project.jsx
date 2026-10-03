@@ -44,8 +44,8 @@ const projects = [
     description:
       'A full-stack dashboard built with ReactJS + Google Apps Script.Pricing Analytics. product prices, discounts, stock status.Sentiment Analysis . review scores and sentiment scoring.',
     image: '/assets/projects/weather.png',
-    tags: ['React',  'Google Apps Script (Web App)'],
-    live: '',
+    tags: ['React', 'Google Apps Script (Web App)'],
+    live: 'https://github.com/sagar8928/Nodejs-machine-test',
     github: 'https://github.com/sagar8928/Nodejs-machine-test',
     category: 'Full Stack',
   },

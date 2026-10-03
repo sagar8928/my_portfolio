@@ -1,6 +1,7 @@
 import React from 'react';
 import Head from 'next/head';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
+import { getResumeUrl } from '@/lib/constant';
 
 export default function Resume() {
   return (
@@ -20,7 +21,7 @@ export default function Resume() {
 
           <div className="flex items-center">
             <a
-              href="/resume.pdf"
+              href={getResumeUrl()}
               target="_blank"
               rel="noreferrer"
               className="text-sm rounded-md shadow-lg shadow-gray-400 p-2 mr-5 hover:scale-110 ease-in duration-300"

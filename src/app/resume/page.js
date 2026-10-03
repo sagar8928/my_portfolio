@@ -1,5 +1,6 @@
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
 import Link from 'next/link';
+import { getResumeUrl } from '@/lib/constant';
 
 export const metadata = {
   title: 'Sagar | Resume',
@@ -16,7 +17,7 @@ export default function Resume() {
 
         <div className="flex items-center">
           <a
-            href="/resume-19-02-2026.pdf"
+            href={getResumeUrl()}
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm rounded-md shadow-lg shadow-gray-400 p-2 mr-5 hover:scale-110 transition"

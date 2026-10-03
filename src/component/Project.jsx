@@ -10,7 +10,7 @@ const projects = [
     title: 'Deepseek Clone – Real-Time AI Conversation Platform',
     description:
       'Built a cutting-edge AI-driven conversational platform leveraging Groq API for real-time, context-aware responses. The Next.js frontend delivers a seamless, responsive user experience, while the Node.js & Express backend orchestrates secure and scalable operations.',
-    image: '/assets/projects/ecommerce.png',
+    image: '/assets/deepseek.png',
     tags: ['React', 'Node.js', 'MongoDB', 'Express', 'Tailwind'],
     live: 'https://github.com/sagar8928/Deepseek-Clone',
     github: 'https://github.com/sagar8928/Deepseek-Clone',
@@ -43,7 +43,7 @@ const projects = [
     title: 'Nodejs-machine-test',
     description:
       'A full-stack dashboard built with ReactJS + Google Apps Script.Pricing Analytics. product prices, discounts, stock status.Sentiment Analysis . review scores and sentiment scoring.',
-    image: '/assets/projects/weather.png',
+    image: '/assets/nodemachine.png',
     tags: ['React', 'Google Apps Script (Web App)'],
     live: 'https://github.com/sagar8928/Nodejs-machine-test',
     github: 'https://github.com/sagar8928/Nodejs-machine-test',

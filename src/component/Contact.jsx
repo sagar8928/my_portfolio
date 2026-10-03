@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useTransition, useEffect } from 'react'; // ✅ Added useEffect
 import emailjs from '@emailjs/browser';
+import { getResumeUrl } from '@/lib/constant';
 
 import { AiOutlineMail } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
@@ -130,7 +131,7 @@ export default function ContactPage() {
                   <AiOutlineMail size={22} />
                 </SocialLink>
 
-                <SocialLink href="/resume.pdf" label="Resume">
+                <SocialLink href={getResumeUrl()} label="Resume">
                   <BsFillPersonLinesFill size={20} />
                 </SocialLink>
               </div>

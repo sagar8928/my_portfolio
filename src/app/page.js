@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { getResumeUrl } from '@/lib/constant';
 import {
   FiArrowRight,
   FiLayout,
@@ -82,7 +83,7 @@ export default function Home() {
               <FaLinkedinIn size={22} />
             </a>
             <a
-              href="/resume.pdf"
+              href={getResumeUrl()}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full p-4 shadow-lg cursor-pointer text-gray-500 hover:text-[#5651e5] hover:scale-110 transition"

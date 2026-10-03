@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { HiMenu, HiX } from 'react-icons/hi';
+import { getResumeUrl } from '@/lib/constant';
 
 const NAV_HEIGHT = 64;
 
@@ -12,7 +13,7 @@ const navLinks = [
   { href: '#skills', label: 'Skills' },
   { href: '#projects', label: 'Projects' },
   { href: '#contact', label: 'Contact' },
-  { href: '/resume.pdf', label: 'Resume', external: true },
+  { href: getResumeUrl(), label: 'Resume', external: true },
 ];
 
 export default function Navbar() {

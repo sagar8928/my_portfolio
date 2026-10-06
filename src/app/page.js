@@ -39,22 +39,8 @@ export default function Home() {
         {/* Glow */}
         {/* <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-secondary blur-2xl opacity-50 z-0" /> */}
 
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          {/* MASCOT (replaces profile image) */}
-          <div className="flex justify-center mb-10">
-            <div className="relative w-[300px] h-[300px]">
-              {/* Glow */}
-              {/* <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-secondary blur-2xl opacity-50 z-0" /> */}
-
-              {/* Mascot */}
-              <div className="flex justify-center mb-10">
-                <PageMascot size={300} />
-              </div>
-            </div>
-          </div>
-
-          {/* Profile Image */}
-          {/* <Image
+        {/* Profile Image */}
+        {/* <Image
                 src="/assets/profile.jpg"
                 alt="Sagar – Full Stack Developer"
                 fill
@@ -63,6 +49,18 @@ export default function Home() {
               />
             </div>
           </div> */}
+
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          {/* MASCOT (replaces profile image) */}
+
+          {/* Glow */}
+          {/* <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-secondary blur-2xl opacity-50 z-0" /> */}
+
+          {/* Mascot */}
+          <div className="flex justify-center -mb-6">
+            <PageMascot size={300} />
+          </div>
+
 
           {/* INTRO */}
           <h1 className="text-5xl md:text-7xl font-bold mb-4">

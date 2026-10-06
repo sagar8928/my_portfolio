@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useTransition, useEffect } from 'react'; // ✅ Added useEffect
 import emailjs from '@emailjs/browser';
-import { getResumeUrl } from '@/lib/constant';
+import { getResumeUrl } from '@/lib/constant.js';
 
 import { AiOutlineMail } from 'react-icons/ai';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';

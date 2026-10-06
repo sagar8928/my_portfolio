@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { getResumeUrl } from '@/lib/constant';
+import { getResumeUrl } from '@/lib/constant.js';
 import {
   FiArrowRight,
   FiLayout,
@@ -9,6 +9,8 @@ import {
   FiFileText,
 } from 'react-icons/fi';
 import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
+
+import PageMascot from '@/component/PageMascot.jsx';
 
 // ✅ CORRECT IMPORT PATH (use @/ alias or relative)
 import AboutSection from '../component/About';
@@ -25,20 +27,34 @@ export default function Home() {
         className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 relative overflow-hidden"
       >
         {/* Background glow */}
-        <div className="absolute inset-0 overflow-hidden">
+        {/* <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/20 rounded-full blur-3xl animate-pulse-slow" />
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary/20 rounded-full blur-3xl animate-pulse-slow delay-1000" />
-        </div>
+        </div> */}
+
+        {/* <div className="max-w-4xl mx-auto text-center relative z-10"> */}
+        {/* PROFILE IMAGE */}
+        {/* <div className="flex justify-center mb-10">
+            <div className="relative w-[300px] h-[300px]"> */}
+        {/* Glow */}
+        {/* <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-secondary blur-2xl opacity-50 z-0" /> */}
 
         <div className="max-w-4xl mx-auto text-center relative z-10">
-          {/* PROFILE IMAGE */}
+          {/* MASCOT (replaces profile image) */}
           <div className="flex justify-center mb-10">
             <div className="relative w-[300px] h-[300px]">
               {/* Glow */}
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-secondary blur-2xl opacity-50 z-0" />
+              {/* <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-secondary blur-2xl opacity-50 z-0" /> */}
 
-              {/* Profile Image */}
-              <Image
+              {/* Mascot */}
+              <div className="flex justify-center mb-10">
+                <PageMascot size={300} />
+              </div>
+            </div>
+          </div>
+
+          {/* Profile Image */}
+          {/* <Image
                 src="/assets/profile.jpg"
                 alt="Sagar – Full Stack Developer"
                 fill
@@ -46,7 +62,7 @@ export default function Home() {
                 className="rounded-full object-cover border-2 border-white/30 shadow-[0_25px_60px_rgba(0,0,0,0.6)] z-10"
               />
             </div>
-          </div>
+          </div> */}
 
           {/* INTRO */}
           <h1 className="text-5xl md:text-7xl font-bold mb-4">

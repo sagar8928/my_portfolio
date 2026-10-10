@@ -1,79 +1,62 @@
 'use client';
 
 import Image from 'next/image';
-import { useState } from 'react'; // ✅ HIGHLIGHT: Needed for filtering
+import { useState } from 'react';
 
 const skills = [
   {
     name: 'HTML',
     src: '/assets/skills/html.png',
-    color: '#e34c26',
     category: 'Frontend',
   },
   {
     name: 'CSS',
     src: '/assets/skills/css.png',
-    color: '#264de4',
     category: 'Frontend',
   },
   {
     name: 'JavaScript',
     src: '/assets/skills/javascript.png',
-    color: '#f7df1e',
     category: 'Frontend',
   },
-  // {
-  //   name: 'TypeScript',
-  //   src: '/assets/skills/typescript.png',
-  //   color: '#3178c6',
-  //   category: 'Frontend',
-  // },
   {
     name: 'React',
     src: '/assets/skills/react.png',
-    color: '#61dafb',
     category: 'Frontend',
   },
   {
     name: 'Next.js',
     src: '/assets/skills/nextjs.png',
-    color: '#000000',
     category: 'Frontend',
   },
   {
     name: 'Node.js',
     src: '/assets/skills/nodeJs.png',
-    color: '#339933',
     category: 'Backend',
   },
   {
     name: 'Express',
     src: '/assets/skills/expressJs.png',
-    color: '#404040',
     category: 'Backend',
   },
   {
     name: 'MongoDB',
     src: '/assets/skills/mongo.png',
-    color: '#47a248',
     category: 'Backend',
   },
   {
     name: 'MySQL',
     src: '/assets/skills/mySql.png',
-    color: '#00758f',
     category: 'Backend',
   },
   {
     name: 'Tailwind',
     src: '/assets/skills/tailwind.png',
-    color: '#06b6d4',
     category: 'Frontend',
   },
   {
     name: 'GitHub',
     src: '/assets/skills/github1.png',
-    color: '#181717',
     category: 'Tools',
   },
 ];
@@ -86,76 +69,183 @@ export default function Skills() {
   const filteredSkills =
     activeCategory === 'All'
       ? skills
-      : skills.filter((skill) => skill.category === activeCategory); 
+      : skills.filter((skill) => skill.category === activeCategory);
 
   return (
     <section
       id="skills"
-      className="w-full py-28 bg-gradient-to-b from-[#fafafa] to-white relative overflow-hidden"
+      className="skills-section relative w-full overflow-hidden border-t py-24 md:py-28"
     >
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        {/* Header */}
-        <div className="max-w-2xl mx-auto text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900 mb-4">
+      {/* Decorative top glow */}
+      <div className="skills-top-glow pointer-events-none absolute left-1/2 top-0 h-px w-3/4 -translate-x-1/2" />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-5 sm:px-6">
+        {/* Heading */}
+        <div className="mx-auto mb-10 max-w-3xl text-center md:mb-12">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-indigo-500">
+            What I Can Do
+          </p>
+
+          <h2 className="skills-heading text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
             What I Can Do
           </h2>
-          <p className="text-lg text-slate-600">
+
+          <p className="skills-description mt-4 text-base sm:text-lg md:text-xl">
             Technologies I use to build production-ready applications.
           </p>
         </div>
 
         {/* Category filters */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              type="button" 
-              onClick={() => setActiveCategory(cat)} 
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all
-                ${
-                  activeCategory === cat
-                    ? 'bg-[#5651e5] text-white shadow-lg'
-                    : 'bg-white text-slate-600 border border-gray-200 hover:text-[#5651e5]'
+        <div className="mb-12 flex flex-wrap justify-center gap-3">
+          {categories.map((category) => {
+            const isActive = activeCategory === category;
+
+            return (
+              <button
+                key={category}
+                type="button"
+                onClick={() => setActiveCategory(category)}
+                aria-pressed={isActive}
+                className={`skills-filter rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300 ${
+                  isActive ? 'skills-filter-active' : 'skills-filter-inactive'
                 }`}
-            >
-              {cat}
-            </button>
-          ))}
+              >
+                {category}
+              </button>
+            );
+          })}
         </div>
 
         {/* Skills grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-5 lg:grid-cols-6 lg:gap-6">
           {filteredSkills.map((skill) => (
             <div key={skill.name} className="group">
-              <div
-                className="
-                  flex flex-col items-center gap-3
-                  p-6 rounded-2xl bg-white
-                  border border-gray-100
-                  shadow-[0_2px_8px_rgba(0,0,0,0.04)]
-                  hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)]
-                  hover:-translate-y-1
-                  transition-all duration-300
-                "
-              >
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gray-50">
+              <div className="skill-card flex h-full min-h-[180px] flex-col items-center justify-center gap-4 rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1.5 sm:min-h-[200px] sm:p-6">
+                {/* Icon container */}
+                <div className="skill-icon-box flex h-20 w-20 items-center justify-center rounded-3xl p-4 transition-all duration-300 group-hover:scale-105 group-hover:border-indigo-400/50">
                   <Image
                     src={skill.src}
-                    alt={skill.name}
-                    width={32}
-                    height={32}
-                    className="object-contain"
+                    alt={`${skill.name} logo`}
+                    width={52}
+                    height={52}
+                    className="h-full w-full object-contain"
                   />
                 </div>
 
-                <span className="text-sm font-semibold text-slate-700">
+                {/* Skill name */}
+                <h3 className="skill-name text-center text-base font-semibold sm:text-lg">
                   {skill.name}
-                </span>
+                </h3>
               </div>
             </div>
           ))}
         </div>
       </div>
+
+      <style jsx>{`
+        .skills-section {
+          background: linear-gradient(
+            135deg,
+            var(--bg-color) 0%,
+            var(--surface-color) 55%,
+            var(--bg-color) 100%
+          );
+          border-color: var(--border-color);
+          transition:
+            background 0.3s ease,
+            border-color 0.3s ease;
+        }
+
+        .skills-top-glow {
+          background: linear-gradient(
+            90deg,
+            transparent,
+            #4338ca 25%,
+            #818cf8 50%,
+            #4338ca 75%,
+            transparent
+          );
+          box-shadow: 0 0 16px rgba(99, 102, 241, 0.3);
+        }
+
+        .skills-heading {
+          color: var(--text-color);
+        }
+
+        .skills-description {
+          color: var(--muted-color);
+        }
+
+        .skill-card {
+          background: rgba(15, 23, 42, 0.25);
+          border-color: var(--border-color);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        .skill-card:hover {
+          border-color: rgba(129, 140, 248, 0.6);
+          box-shadow: 0 12px 32px rgba(79, 70, 229, 0.12);
+        }
+
+        .skill-icon-box {
+          background: linear-gradient(
+            145deg,
+            rgba(99, 102, 241, 0.17),
+            rgba(30, 41, 59, 0.3)
+          );
+          border: 1px solid rgba(129, 140, 248, 0.08);
+        }
+
+        .skill-name {
+          color: var(--text-color);
+        }
+
+        .skills-filter-active {
+          background: linear-gradient(135deg, #4f46e5, #6366f1);
+          color: #ffffff;
+          border: 1px solid #6366f1;
+          box-shadow: 0 5px 20px rgba(79, 70, 229, 0.22);
+        }
+
+        .skills-filter-inactive {
+          background: transparent;
+          color: var(--text-color);
+          border: 1px solid var(--border-color);
+        }
+
+        .skills-filter-inactive:hover {
+          border-color: #818cf8;
+          color: #818cf8;
+          background: rgba(99, 102, 241, 0.06);
+        }
+
+        /* Light theme */
+        :global(html[data-theme='light']) .skill-card {
+          background: rgba(255, 255, 255, 0.85);
+          box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+        }
+
+        :global(html[data-theme='light']) .skill-card:hover {
+          box-shadow: 0 12px 32px rgba(79, 70, 229, 0.1);
+        }
+
+        :global(html[data-theme='light']) .skill-icon-box {
+          background: linear-gradient(145deg, #eef2ff, #f8fafc);
+          border-color: #e0e7ff;
+        }
+
+        :global(html[data-theme='light']) .skills-filter-inactive {
+          background: #ffffff;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .skill-card,
+          .skill-icon-box,
+          .skills-filter {
+            transition: none;
+          }
+        }
+      `}</style>
     </section>
   );
 }

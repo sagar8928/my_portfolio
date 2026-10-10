@@ -18,9 +18,12 @@ import Projects from '../component/Project';
 import ContactSection from '../component/Contact';
 import Skills from '../component/Skills';
 
+
 export default function Home() {
   return (
     <div className="pt-16">
+
+    
       {/* HERO SECTION */}
       <section
         id="home"

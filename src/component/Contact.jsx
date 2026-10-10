@@ -71,8 +71,11 @@ export default function ContactPage() {
         formRef.current.reset();
         alert('✅ Message sent successfully!');
       } catch (error) {
-        console.error(' EmailJS Error:', error);
-        alert('❌ Failed to send message: ' + error.message);
+        console.error('EmailJS status:', error.status);
+        console.error('EmailJS response:', error.text);
+        console.error('Full EmailJS error:', error);
+
+        alert(`Failed to send message (${error.status}): ${error.text}`);
       }
     });
   }
